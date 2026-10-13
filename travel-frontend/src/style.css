@@ -1,0 +1,84 @@
+/**
+ * 全局样式（f-foundation）：极简 reset + 通用 page 容器 + 基础排版变量。
+ *
+ * <p>组建原则：保持简洁，勿过度设计；业务样式下沉到各组件 scoped 样式中。
+ */
+
+/* ---------- reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--el-text-color-primary);
+  background-color: var(--el-bg-color-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- 通用容器 ---------- */
+/* 页面统一宽度与内边距，业务页面以 class="page" 包裹即可 */
+.page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ---------- 基础排版变量 ---------- */
+:root {
+  --app-radius: 8px;
+  --app-gap: 16px;
+}
+
+/* ---------- 工具类 ---------- */
+.text-secondary {
+  color: var(--el-text-color-secondary);
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

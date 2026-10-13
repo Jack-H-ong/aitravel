@@ -1,0 +1,65 @@
+# ===== 通用 =====
+*.log
+*.tmp
+*.bak
+*.zip
+*.rar
+*.7z
+.DS_Store
+Thumbs.db
+
+# ===== 后端 Java =====
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Maven wrapper (keep jar reference)
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+!.vscode/extensions.json
+
+# STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# ===== 前端 Node =====
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===== 敏感配置 =====
+# 数据库密码、JWT 密钥、AI API Key 等请通过环境变量注入
+# 不要将 .env、application-local.yml 等本地配置提交
+.env
+.env.local
+.env.*.local
+**/application-local.yml
+**/application-dev.yml
+**/*.env
+
+# ===== 系统文件 =====
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
