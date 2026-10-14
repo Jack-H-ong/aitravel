@@ -27,6 +27,9 @@ const CITIES = ['北京', '上海', '杭州', '成都']
 /** 分类固定选项。 */
 const CATEGORIES = ['自然', '人文', '主题乐园', '其他']
 
+/** 首页景点列表每页默认条数。 */
+const HOME_PAGE_SIZE = 12
+
 const scenicStore = useScenicStore()
 
 /** 列表加载态。 */
@@ -46,7 +49,7 @@ const form = reactive({
 const page = ref(Number(scenicStore.filters.page) || PAGE.DEFAULT_PAGE)
 
 /** 每页条数（数字）。 */
-const size = ref(Number(scenicStore.filters.size) || PAGE.DEFAULT_SIZE)
+const size = ref(Number(scenicStore.filters.size) || HOME_PAGE_SIZE)
 
 /** 列表数据（id 为字符串）。 */
 const list = computed(() => scenicStore.list)
@@ -96,7 +99,7 @@ function handleReset() {
   form.keyword = ''
   scenicStore.resetFilters()
   page.value = PAGE.DEFAULT_PAGE
-  size.value = PAGE.DEFAULT_SIZE
+  size.value = HOME_PAGE_SIZE
   fetchList()
 }
 
@@ -120,7 +123,7 @@ onMounted(fetchList)
   <div class="home page">
     <header class="home__hero">
       <h1 class="home__title">发现你的下一段旅程</h1>
-      <p class="home__subtitle">AI 旅游攻略 · 智能规划 · 景点推荐</p>
+      <p class="home__subtitle">AI 智能规划行程，把山川湖海装进每一天</p>
     </header>
 
     <el-card class="home__filters" shadow="never">
@@ -178,7 +181,7 @@ onMounted(fetchList)
         background
         layout="total, sizes, prev, pager, next"
         :total="total"
-        :page-sizes="[10, 20, 50]"
+        :page-sizes="[HOME_PAGE_SIZE, 24, 48]"
         @change="handlePagerChange"
       />
     </div>
@@ -187,27 +190,50 @@ onMounted(fetchList)
 
 <style scoped>
 .home {
-  padding-top: 8px;
+  padding-top: 4px;
 }
 
 .home__hero {
-  text-align: center;
-  padding: 24px 0 8px;
+  position: relative;
+  overflow: hidden;
+  margin: 4px 0 24px;
+  padding: 48px 44px;
+  border-radius: 22px;
+  color: #fff;
+  background:
+    radial-gradient(520px 240px at 88% 16%, rgba(232, 161, 58, 0.22), transparent 60%),
+    linear-gradient(130deg, var(--app-primary-ink) 0%, var(--app-primary-deep) 55%, var(--app-primary) 100%);
+}
+
+.home__hero::after {
+  content: '';
+  position: absolute;
+  right: -60px;
+  bottom: -90px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .home__title {
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0 0 8px;
+  font-family: var(--app-font-display);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  margin: 0 0 14px;
 }
 
 .home__subtitle {
-  color: var(--el-text-color-secondary);
-  margin: 0 0 8px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+  margin: 0;
 }
 
 .home__filters {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  border-radius: var(--app-radius);
 }
 
 .home__filter-row {

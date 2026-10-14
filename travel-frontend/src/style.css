@@ -1,7 +1,8 @@
 /**
- * 全局样式（f-foundation）：极简 reset + 通用 page 容器 + 基础排版变量。
+ * 全局设计系统（f-foundation + 视觉升级）。
  *
- * <p>组建原则：保持简洁，勿过度设计；业务样式下沉到各组件 scoped 样式中。
+ * 主题「山海 · 晚霞」：以深青绿（山川湖海）为主色、暖琥珀（旅途晚霞）为点缀，
+ * 标题使用衬线（宋体）营造旅行手记的编辑感，正文用无衬线保证可读。
  */
 
 /* ---------- reset ---------- */
@@ -17,13 +18,71 @@ body,
   padding: 0;
 }
 
+/* ---------- 设计令牌 ---------- */
+:root {
+  /* 品牌色 */
+  --app-primary: #0e7c6b; /* 深青绿：山川湖海 */
+  --app-primary-deep: #0a5a4f;
+  --app-primary-ink: #073e37;
+  --app-primary-soft: #e6f2ef;
+  --app-accent: #e8a13a; /* 暖琥珀：旅途晚霞 */
+  --app-accent-soft: #fdf1e0;
+
+  /* 中性色 */
+  --app-bg: #f4f7f6;
+  --app-surface: #ffffff;
+  --app-ink: #182826;
+  --app-ink-soft: #5c6b68;
+
+  /* 字体 */
+  --app-font-display: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --app-font-body: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* 形状 / 阴影 */
+  --app-radius: 14px;
+  --app-radius-sm: 10px;
+  --app-gap: 20px;
+  --app-shadow: 0 10px 30px -12px rgba(14, 124, 107, 0.18);
+  --app-shadow-strong: 0 20px 50px -20px rgba(7, 62, 55, 0.35);
+}
+
+/* ---------- Element Plus 变量覆盖 ---------- */
+:root {
+  --el-color-primary: #0e7c6b;
+  --el-color-primary-light-3: #56a397;
+  --el-color-primary-light-5: #86bdb5;
+  --el-color-primary-light-7: #b7d7d2;
+  --el-color-primary-light-8: #cfe4e1;
+  --el-color-primary-light-9: #e7f1f0;
+  --el-color-primary-dark-2: #0a5a4f;
+
+  --el-color-warning: #e8a13a;
+
+  --el-font-family: var(--app-font-body);
+  --el-text-color-primary: var(--app-ink);
+  --el-text-color-regular: #33423f;
+  --el-text-color-secondary: var(--app-ink-soft);
+  --el-bg-color-page: var(--app-bg);
+
+  --el-border-radius-base: 10px;
+  --el-border-radius-small: 8px;
+  --el-border-radius-round: 20px;
+
+  --el-box-shadow-light: 0 6px 20px -10px rgba(24, 40, 38, 0.18);
+}
+
+/* ---------- 基础排版 ---------- */
 body {
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', Arial, sans-serif;
+  font-family: var(--app-font-body);
   font-size: 14px;
-  line-height: 1.6;
-  color: var(--el-text-color-primary);
-  background-color: var(--el-bg-color-page);
+  line-height: 1.7;
+  color: var(--app-ink);
+  background-color: var(--app-bg);
+  background-image:
+    radial-gradient(1200px 420px at 18% -8%, rgba(14, 124, 107, 0.07), transparent 60%),
+    radial-gradient(900px 380px at 88% -6%, rgba(232, 161, 58, 0.06), transparent 55%);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -34,6 +93,13 @@ h3,
 h4 {
   margin: 0;
   font-weight: 600;
+}
+
+/* 页面 / 区块标题用衬线，营造编辑感 */
+h1,
+h2 {
+  font-family: var(--app-font-display);
+  letter-spacing: 0.01em;
 }
 
 p {
@@ -57,28 +123,55 @@ img {
   display: block;
 }
 
+::selection {
+  background: var(--app-primary-soft);
+  color: var(--app-primary-ink);
+}
+
 /* ---------- 通用容器 ---------- */
-/* 页面统一宽度与内边距，业务页面以 class="page" 包裹即可 */
 .page {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 16px;
-}
-
-/* ---------- 基础排版变量 ---------- */
-:root {
-  --app-radius: 8px;
-  --app-gap: 16px;
+  padding: 20px 24px 40px;
 }
 
 /* ---------- 工具类 ---------- */
 .text-secondary {
-  color: var(--el-text-color-secondary);
+  color: var(--app-ink-soft);
 }
 
 .text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* ---------- 共享组件质感 ---------- */
+/* 卡片统一圆角与阴影，去除默认生硬边框 */
+.el-card {
+  border: 1px solid rgba(24, 40, 38, 0.06);
+  border-radius: var(--app-radius);
+  box-shadow: none;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+
+.el-card.is-hover-shadow:hover {
+  box-shadow: var(--app-shadow);
+  transform: translateY(-3px);
+}
+
+/* 主按钮加一点分量 */
+.el-button--primary {
+  --el-button-bg-color: var(--app-primary);
+  --el-button-border-color: var(--app-primary);
+  --el-button-hover-bg-color: var(--app-primary-deep);
+  --el-button-hover-border-color: var(--app-primary-deep);
+  font-weight: 500;
+}
+
+/* 表格与后台页更通透 */
+.el-table {
+  --el-table-header-bg-color: var(--app-primary-soft);
+  --el-table-header-text-color: var(--app-primary-ink);
 }

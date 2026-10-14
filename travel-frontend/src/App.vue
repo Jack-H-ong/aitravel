@@ -120,25 +120,47 @@ onMounted(() => {
 }
 
 .app__header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
-  gap: 24px;
-  border-bottom: 1px solid var(--el-border-color-lighter);
-  background: #fff;
+  gap: 28px;
+  height: 64px;
+  padding: 0 24px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid rgba(24, 40, 38, 0.07);
 }
 
 .app__brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 18px;
   white-space: nowrap;
+  user-select: none;
 }
 
 .app__logo {
-  color: var(--el-color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-size: 17px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-primary-deep) 100%);
+  box-shadow: 0 6px 14px -6px rgba(14, 124, 107, 0.5);
+}
+
+.app__name {
+  font-family: var(--app-font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--app-ink);
 }
 
 .app__nav {
@@ -149,32 +171,35 @@ onMounted(() => {
 }
 
 .app__nav-link {
-  padding: 6px 12px;
-  border-radius: 6px;
-  color: var(--el-text-color-regular);
+  padding: 7px 14px;
+  border-radius: 999px;
+  color: var(--app-ink-soft);
   font-size: 14px;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .app__nav-link:hover {
-  background: var(--el-fill-color-light);
-  color: var(--el-color-primary);
+  background: var(--app-primary-soft);
+  color: var(--app-primary-ink);
 }
 
 .app__nav-link.router-link-active {
-  color: var(--el-color-primary);
-  font-weight: 500;
+  background: var(--app-primary-soft);
+  color: var(--app-primary-ink);
+  font-weight: 600;
 }
 
 .app__user {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   white-space: nowrap;
 }
 
 .app__username {
   font-size: 14px;
-  color: var(--el-text-color-regular);
+  color: var(--app-ink);
+  font-weight: 500;
 }
 
 .app__user-trigger {
@@ -186,6 +211,6 @@ onMounted(() => {
 }
 
 .app__main {
-  background: var(--el-bg-color-page);
+  background: transparent;
 }
 </style>

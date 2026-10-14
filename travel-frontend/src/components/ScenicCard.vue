@@ -115,6 +115,11 @@ function goDetail() {
   height: 160px;
   object-fit: cover;
   display: block;
+  transition: transform 0.45s ease;
+}
+
+.scenic-card:hover .scenic-card__img {
+  transform: scale(1.06);
 }
 
 .scenic-card__placeholder {
@@ -168,7 +173,7 @@ function goDetail() {
 }
 
 .scenic-card__price {
-  color: var(--el-color-danger);
+  color: var(--app-accent);
   font-size: 16px;
   font-weight: 600;
 }

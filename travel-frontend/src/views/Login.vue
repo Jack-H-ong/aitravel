@@ -64,7 +64,10 @@ async function handleSubmit() {
   <div class="auth page">
     <el-card class="auth__card">
       <template #header>
-        <span>登录</span>
+        <div class="auth__head">
+          <h1 class="auth__title">登录</h1>
+          <p class="auth__subtitle">欢迎回来，继续你的旅程</p>
+        </div>
       </template>
 
       <el-form
@@ -119,11 +122,30 @@ async function handleSubmit() {
 .auth {
   display: flex;
   justify-content: center;
-  padding-top: 48px;
+  padding-top: 56px;
 }
 
 .auth__card {
-  width: 380px;
+  width: 400px;
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+.auth__head {
+  text-align: center;
+}
+
+.auth__title {
+  font-family: var(--app-font-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.auth__subtitle {
+  color: var(--app-ink-soft);
+  font-size: 13px;
+  margin: 0;
 }
 
 .auth__submit {
@@ -131,7 +153,7 @@ async function handleSubmit() {
 }
 
 .auth__footer {
-  color: var(--el-text-color-secondary);
+  color: var(--app-ink-soft);
   font-size: 13px;
   text-align: center;
 }

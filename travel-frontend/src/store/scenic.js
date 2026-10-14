@@ -14,7 +14,7 @@ function defaultFilters() {
     category: '',
     keyword: '',
     page: PAGE.DEFAULT_PAGE,
-    size: PAGE.DEFAULT_SIZE
+    size: 12 // 首页景点列表默认每页 12 条
   }
 }
 
