@@ -47,6 +47,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# ===== 本地文档（仅本地保留，不纳入版本管理） =====
+doc/
+
 # ===== 敏感配置 =====
 # 数据库密码、JWT 密钥、AI API Key 等请通过环境变量注入
 # 不要将 .env、application-local.yml 等本地配置提交

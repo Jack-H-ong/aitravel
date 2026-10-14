@@ -81,22 +81,17 @@ aitravel/
 │   │   └── config/              # WebMvc、MyBatis-Plus、AI 装配
 │   └── src/main/resources/application.yml
 │
-├── travel-frontend/              # Vue3 前端
-│   ├── src/
-│   │   ├── views/               # 页面组件
-│   │   │   ├── admin/           # 后台管理页面
-│   │   │   └── ...              # 用户页面
-│   │   ├── components/          # 公共组件（卡片、时间轴、对话气泡）
-│   │   ├── api/                 # 按业务域划分的接口模块
-│   │   ├── store/               # Pinia 状态（user/scenic/trip/chat）
-│   │   ├── router/              # 路由表 + 全局守卫
-│   │   └── utils/               # axios 封装、Token 读写、常量
-│   └── vite.config.js
-│
-└── doc/                          # 设计文档
-    ├── proposal.md              # 需求文档
-    ├── high-level-design.md     # 概要设计文档
-    └── detailed-design.md       # 详细设计文档
+└── travel-frontend/              # Vue3 前端
+    ├── src/
+    │   ├── views/               # 页面组件
+    │   │   ├── admin/           # 后台管理页面
+    │   │   └── ...              # 用户页面
+    │   ├── components/          # 公共组件（卡片、时间轴、对话气泡）
+    │   ├── api/                 # 按业务域划分的接口模块
+    │   ├── store/               # Pinia 状态（user/scenic/trip/chat）
+    │   ├── router/              # 路由表 + 全局守卫
+    │   └── utils/               # axios 封装、Token 读写、常量
+    └── vite.config.js
 ```
 
 ---
@@ -142,7 +137,7 @@ export DB_PASSWORD=your_db_password
 export JWT_SECRET=your-production-jwt-secret-key-32chars-minimum
 
 # AI 服务 API Key（通义千问）
-export AI_API_KEY=your-dashscope-api-key
+export API_KEY=your-dashscope-api-key
 ```
 
 **2.2 修改配置文件**（如不使用环境变量）
@@ -162,7 +157,7 @@ jwt:
 ai:
   api:
     provider: tongyi
-    api-key: ${AI_API_KEY:}   # ← 设置你的 DashScope API Key
+    api-key: ${API_KEY}   # ← 从环境变量 API_KEY 读取
     model: qwen-turbo
     base-url: https://dashscope.aliyuncs.com
     timeout: 30000
@@ -353,16 +348,6 @@ trip ──1:N── trip_spot ──N:1── scenic_spot
 
 ---
 
-## 📚 详细设计文档
-
-| 文档 | 说明 | 阅读顺序 |
-|------|------|----------|
-| [doc/proposal.md](doc/proposal.md) | 需求文档（功能编号、接口契约、表结构、Prompt 模板） | 1️⃣ |
-| [doc/high-level-design.md](doc/high-level-design.md) | 概要设计（模块划分、依赖方向、时序图、关键设计决策 D-01~D-04） | 2️⃣ |
-| [doc/detailed-design.md](doc/detailed-design.md) | 详细设计（类结构、字段级接口、伪代码、异常码、单元测试要点） | 3️⃣ |
-
----
-
 ## ⚠️ 安全提示
 
 1. **生产环境必须修改默认密码**：
@@ -370,7 +355,7 @@ trip ──1:N── trip_spot ──N:1── scenic_spot
    - JWT 密钥（`jwt.secret`，至少 32 字符）
    - 默认账号密码（`admin`/`admin123`、`demo`/`user123`）
 
-2. **API Key 不要硬编码**：通过环境变量 `AI_API_KEY` 注入
+2. **API Key 不要硬编码**：通过环境变量 `API_KEY` 注入
 
 3. **密码已加密存储**：使用 BCrypt（Spring Security Crypto 工具包），禁止明文
 

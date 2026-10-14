@@ -33,7 +33,7 @@ jwt:
 ai:
   api:
     provider: tongyi
-    api-key: ${AI_API_KEY:}
+    api-key: ${API_KEY}
     model: qwen-turbo
     base-url: https://dashscope.aliyuncs.com
     timeout: 30000
