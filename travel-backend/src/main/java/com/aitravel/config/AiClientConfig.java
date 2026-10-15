@@ -5,6 +5,8 @@ import com.aitravel.service.ai.AiResponseParser;
 import com.aitravel.service.ai.PromptBuilder;
 import com.aitravel.service.ai.impl.TongyiAiClient;
 import java.time.Duration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +24,8 @@ import org.springframework.web.client.RestClient;
 @EnableConfigurationProperties(AiProperties.class)
 public class AiClientConfig {
 
+    private static final Logger log = LoggerFactory.getLogger(AiClientConfig.class);
+
     /** 连接超时（毫秒）。 */
     private static final int CONNECT_TIMEOUT_MILLIS = 5000;
 
@@ -37,6 +41,13 @@ public class AiClientConfig {
     @ConditionalOnProperty(name = "ai.api.provider", havingValue = "tongyi", matchIfMissing = true)
     public AiGateway tongyiAiGateway(AiProperties props, PromptBuilder promptBuilder,
                                      AiResponseParser responseParser) {
+        if (props.getApiKey() == null || props.getApiKey().isBlank()) {
+            log.warn("AI API key is blank — 请设置环境变量 QWEN_API_KEY（或 API_KEY）后重启，"
+                    + "否则 AI 功能将返回 401 失败。");
+        } else {
+            log.info("AI API key loaded (provider={}, model={})", props.getProvider(),
+                    props.getModel());
+        }
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         requestFactory.setConnectTimeout(Duration.ofMillis(CONNECT_TIMEOUT_MILLIS));
         requestFactory.setReadTimeout(Duration.ofMillis(props.getTimeout()));

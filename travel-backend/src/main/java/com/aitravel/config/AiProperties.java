@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * AI 服务网关配置（详细设计 §2.4.1，前缀 {@code ai.api}）。
  *
- * <p>API Key 通过环境变量 {@code AI_API_KEY} 注入，禁止硬编码。
+ * <p>API Key 通过环境变量 {@code QWEN_API_KEY}（兼容 {@code API_KEY}）注入，禁止硬编码。
  */
 @ConfigurationProperties(prefix = "ai.api")
 public class AiProperties {
@@ -13,11 +13,11 @@ public class AiProperties {
     /** Provider 标识，默认 tongyi。 */
     private String provider = "tongyi";
 
-    /** 访问密钥（来自 {@code AI_API_KEY}）。 */
+    /** 访问密钥（来自 {@code QWEN_API_KEY}，兼容 {@code API_KEY}）。 */
     private String apiKey = "";
 
     /** 模型名称。 */
-    private String model = "qwen-turbo";
+    private String model = "qwen-max";
 
     /** 服务基础地址。 */
     private String baseUrl = "https://dashscope.aliyuncs.com";

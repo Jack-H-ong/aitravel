@@ -136,8 +136,8 @@ export DB_PASSWORD=your_db_password
 # JWT 密钥（至少 32 字符，生产环境必须修改）
 export JWT_SECRET=your-production-jwt-secret-key-32chars-minimum
 
-# AI 服务 API Key（通义千问）
-export API_KEY=your-dashscope-api-key
+# AI 服务 API Key（通义千问 / DashScope）
+export QWEN_API_KEY=your-dashscope-api-key
 ```
 
 **2.2 修改配置文件**（如不使用环境变量）
@@ -157,8 +157,8 @@ jwt:
 ai:
   api:
     provider: tongyi
-    api-key: ${API_KEY}   # ← 从环境变量 API_KEY 读取
-    model: qwen-turbo
+    api-key: ${QWEN_API_KEY}   # ← 从环境变量 QWEN_API_KEY 读取（兼容 API_KEY）
+    model: qwen-max
     base-url: https://dashscope.aliyuncs.com
     timeout: 30000
     temperature: 0.7
@@ -355,7 +355,7 @@ trip ──1:N── trip_spot ──N:1── scenic_spot
    - JWT 密钥（`jwt.secret`，至少 32 字符）
    - 默认账号密码（`admin`/`admin123`、`demo`/`user123`）
 
-2. **API Key 不要硬编码**：通过环境变量 `API_KEY` 注入
+2. **API Key 不要硬编码**：通过环境变量 `QWEN_API_KEY`（或 `API_KEY`）注入
 
 3. **密码已加密存储**：使用 BCrypt（Spring Security Crypto 工具包），禁止明文
 
